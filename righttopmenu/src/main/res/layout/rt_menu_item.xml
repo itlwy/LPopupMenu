@@ -33,5 +33,5 @@
         android:background="@drawable/shape_circle"
         android:gravity="center"
         android:textColor="#ffffff"
-        android:textSize="13sp"/>
+        android:textSize="12sp"/>
 </RelativeLayout>

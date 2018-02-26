@@ -42,6 +42,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
     @Override
     public MenuViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RelativeLayout view = (RelativeLayout) LayoutInflater.from(mContext).inflate(R.layout.rt_menu_item, null);
+        RecyclerView.LayoutParams params = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        view.setLayoutParams(params);
         return new MenuViewHolder(view);
     }
 
@@ -49,7 +51,14 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
     public void onBindViewHolder(MenuViewHolder holder, final int position) {
         MenuItem menuItem = mMenuItemList.get(position);
         holder.mTextTV.setText(menuItem.getText());
-        if (menuItem.getBadgeCount() > 0) {
+        if (menuItem.getBadgeCount() > 99) {
+            holder.mBadgeTV.setVisibility(View.VISIBLE);
+            holder.mBadgeTV.setText("");
+            holder.mBadgeTV.setBackgroundResource(R.drawable.skin_tips_newmessage_ninetynine);
+            ViewGroup.LayoutParams params = holder.mBadgeTV.getLayoutParams();
+            params.width = dip2Px(40);
+            params.height = dip2Px(20);
+        } else if (menuItem.getBadgeCount() > 0) {
             holder.mBadgeTV.setVisibility(View.VISIBLE);
             holder.mBadgeTV.setText(menuItem.getBadgeCount() + "");
         } else {
@@ -60,11 +69,11 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         holder.mIcon.setImageResource(iconRes < 0 ? 0 : iconRes);
 
         if (position == 0) {
-            holder.mContainer.setBackgroundDrawable(addStateDrawable(mContext, -1, R.drawable.popup_top_pressed));
+            holder.mContainer.setBackground(addStateDrawable(mContext, -1, R.drawable.popup_top_pressed));
         } else if (position == mMenuItemList.size() - 1) {
-            holder.mContainer.setBackgroundDrawable(addStateDrawable(mContext, -1, R.drawable.popup_bottom_pressed));
+            holder.mContainer.setBackground(addStateDrawable(mContext, -1, R.drawable.popup_bottom_pressed));
         } else {
-            holder.mContainer.setBackgroundDrawable(addStateDrawable(mContext, -1, R.drawable.popup_middle_pressed));
+            holder.mContainer.setBackground(addStateDrawable(mContext, -1, R.drawable.popup_middle_pressed));
         }
         holder.mContainer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,5 +116,10 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         }
     }
 
-
+    /*
+     * converts dip to px
+     */
+    public int dip2Px(float dip) {
+        return (int) (dip * mContext.getResources().getDisplayMetrics().density + 0.5f);
+    }
 }

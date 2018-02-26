@@ -32,7 +32,7 @@ public class RightTopMenu {
     private boolean mNeedAnimationStyle;
     private int mAnimationStyle;
     private boolean mDimBackground;
-    private float mAlpha = 0.2f;
+    private float mAlpha = 0.75f;
 
     RightTopMenu(Activity activity, int windowHeight, int windowWidth, boolean needAnimationStyle,
                  int animationStyle, boolean dimBackground, List<MenuItem> menuItems, OnMenuItemClickListener onMenuItemClickListener) {
@@ -47,14 +47,17 @@ public class RightTopMenu {
         init();
     }
 
-    public RightTopMenu addMenuItem(MenuItem item) {
-        mMenuItems.add(item);
-        return this;
+    public List<MenuItem> getMenuItems() {
+        return mMenuItems;
     }
 
-    public RightTopMenu addMenuList(List<MenuItem> list) {
+
+    public void addMenuItem(MenuItem item) {
+        mMenuItems.add(item);
+    }
+
+    public void addMenuList(List<MenuItem> list) {
         mMenuItems.addAll(list);
-        return this;
     }
 
     private void init() {
@@ -110,6 +113,7 @@ public class RightTopMenu {
         }
         if (!mPopupWindow.isShowing()) {
             mPopupWindow.showAsDropDown(anchor, xoff, yoff);
+            mAdapter.notifyDataSetChanged();
             if (mDimBackground) {
                 setBackgroundAlpha(1f, mAlpha, 240);
             }
