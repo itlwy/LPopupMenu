@@ -22,7 +22,7 @@ Add the dependency
 
 ```
 dependencies {
-	        compile 'com.github.itlwy:LPopupMenu:v1.0'
+	        compile 'com.github.itlwy:LPopupMenu:v1.1'
 	}
 
 ```
