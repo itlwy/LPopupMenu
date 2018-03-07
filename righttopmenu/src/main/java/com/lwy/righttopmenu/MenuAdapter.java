@@ -53,10 +53,10 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         holder.mTextTV.setText(menuItem.getText());
         if (menuItem.getBadgeCount() > 99) {
             holder.mBadgeTV.setVisibility(View.VISIBLE);
-            holder.mBadgeTV.setText("");
-            holder.mBadgeTV.setBackgroundResource(R.drawable.skin_tips_newmessage_ninetynine);
+            holder.mBadgeTV.setText("99+");
+            holder.mBadgeTV.setBackgroundResource(R.drawable.badge_red);
             ViewGroup.LayoutParams params = holder.mBadgeTV.getLayoutParams();
-            params.width = dip2Px(40);
+            params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
             params.height = dip2Px(20);
         } else if (menuItem.getBadgeCount() > 0) {
             holder.mBadgeTV.setVisibility(View.VISIBLE);

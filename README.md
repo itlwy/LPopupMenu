@@ -55,6 +55,46 @@ dependencies {
                 mRightTopMenu.showAsDropDown(mMenuIV, 0, 0);
 ```
 
-　　目前合适就拿去用吧~
+　　觉得合适就拿去用吧~
+# Otherthing
+　　项目依赖了
+
+```
+com.android.support:recyclerview-v7:26.1.0
+com.android.support:appcompat-v7:26.1.0
+```
+  当你的项目里已有这些依赖时，按照gradle的编译特性，会取最新版本的。所以，可能会报错咯，解决办法可参考[gradle提供的依赖冲突解决方案](http://blog.csdn.net/Weiye__Lee/article/details/79472501).下面是给出示例解决方案(build.gradle文件)：
+  
+```
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "26.0.2"
+
+  ......
+  
+//configurations.all {
+//    resolutionStrategy {
+//        force 'com.android.support:appcompat-v7:23.2.1'  // 这里可以采用设置强制版本
+//    }
+//}
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:23.2.1'
+    compile "com.android.support:recyclerview-v7:23.4.0"
+    compile 'com.android.support:design:23.2.1'
+    compile ("com.github.itlwy:LPopupMenu:v1.0"){
+        exclude group: 'com.android.support',module: 'appcompat-v7'
+        exclude group: 'com.android.support',module: 'recyclerview-v7'
+    }
+    testCompile 'junit:junit:4.12'
+}
+
+```
+
 # By the way
-　　关于数量的提示角标，是用shape画的圆。但是当大于99时，直接撑大显示不好看，改成和qq那边的效果类似（两边半圆，中间矩形）；由于本人才疏学浅，暂时没找到代码的简单实现，直接用图片代替了，这方面有待改进（查了下网上的实现，大部分是用.9图代替的，但是要动态改变圈的颜色效果什么的就不好弄了）
+　　关于数量的提示角标，是用shape画的圆(要改颜色的话方便~)。但是当大于99时，直接撑大显示不好看，改成和qq那边的效果类似（两边半圆，中间矩形）；由于水平有限，暂时没找到代码的简单实现，直接用图片代替了，这方面有待改进（查了下网上的实现，大部分是用.9图代替的，但是要动态改变圈的颜色效果什么的就不好弄了）
