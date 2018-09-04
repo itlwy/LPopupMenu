@@ -1,5 +1,5 @@
 # 仿QQ右上角的弹出菜单框
-
+欢迎Star，欢迎Fork~
 # Screenshots
 #![Alt text](https://github.com/itlwy/LPopupMenu/blob/master/pic/rtPopupMenu.gif)
 
